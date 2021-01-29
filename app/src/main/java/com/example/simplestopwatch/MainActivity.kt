@@ -10,8 +10,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    private var running = false
+    private var seconds = 0
+
     fun onClickStart(view: View) {
-        //findViewById(layout.div(activity_main.xml):24)
+        running = true
     }
-    fun onClickStop(view: View) {}
+    fun onClickStop(view: View) {
+        running = false
+    }
+
+    fun onClickReset(view: View) {
+        running = false
+        seconds = 0
+    }
 }
