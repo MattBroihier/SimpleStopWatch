@@ -2,11 +2,13 @@ package com.example.simplestopwatch
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+//import java.lang.String
 import java.util.*
-import java.util.concurrent.TimeUnit
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,16 +17,18 @@ class MainActivity : AppCompatActivity() {
 
         val TimeDisplayView: TextView = findViewById(R.id.TimeDisplay_textView)
 
-        object : CountDownTimer(30000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val timeRemaining = "seconds remaining: " + (millisUntilFinished / 1000).toString()
-                TimeDisplayView.setText(timeRemaining)
-            }
+        runTimer()
 
-            override fun onFinish() {
-                TimeDisplayView.setText("done!")
-            }
-        }.start()
+//        object : CountDownTimer(30000, 1000) {
+//            override fun onTick(millisUntilFinished: Long) {
+//                val timeRemaining = "seconds remaining: " + (millisUntilFinished / 1000).toString()
+//                TimeDisplayView.text = timeRemaining
+//            }
+//
+//            override fun onFinish() {
+//                TimeDisplayView.text = "done!"
+//            }
+//        }.start()
     }
 
     private var running = false
@@ -43,6 +47,50 @@ class MainActivity : AppCompatActivity() {
         running = false
         seconds = 0
     }
+
+    private fun runTimer() {
+
+        // Get the text view.
+        val timeView: TextView = findViewById(R.id.TimeDisplay_textView)
+
+        // Creates a new Handler
+        val handler = Handler()
+
+        // Call the post() method,
+        // passing in a new Runnable.
+        // The post() method processes
+        // code without a delay,
+        // so the code in the Runnable
+        // will run almost immediately.
+        handler.post(object : Runnable {
+            override fun run() {
+                val hours = seconds / 3600
+                val minutes = seconds % 3600 / 60
+                val secs = seconds % 60
+
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                val time = String
+                        .format(Locale.getDefault(),
+                                "%d:%02d:%02d", hours,
+                                minutes, secs)
+
+                // Set the text view text.
+                timeView.text = time
+
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    seconds++
+                }
+
+                // Post the code again
+                // with a delay of 1 second.
+                handler.postDelayed(this, 1000)
+            }
+        })
+    }
+
 }
 
 // Method to configure and return an instance of CountDownTimer object
