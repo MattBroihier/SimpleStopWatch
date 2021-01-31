@@ -3,14 +3,11 @@ package com.example.simplestopwatch
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-//import java.lang.String
 import java.util.*
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,24 +19,11 @@ class MainActivity : AppCompatActivity() {
 
         runTimer()
 
-        object : CountDownTimer(30000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val timeRemaining = "seconds remaining: " + (millisUntilFinished / 1000).toString()
-                CountdownTimerDisplayView.text = timeRemaining
-            }
-
-            override fun onFinish() {
-                CountdownTimerDisplayView.text = getString(R.string.doneMessage)
-            }
-        }.start()
+        runCountdownTimer(CountdownTimerDisplayView)
     }
 
     private var running = false
     private var seconds = 0
-
-    //private val StartButton: Button = findViewById(R.id.Start_button)
-
-    //private var TimeDisplayView: TextView = findViewById(R.id.TimeDisplay_textView)
 
     fun onClickStart(view: View) {
         running = true
@@ -63,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         val stopButton: Button = findViewById(R.id.Stop_button)
         stopButton.isEnabled = true
     }
-
     private fun runTimer() {
 
         // Get the text view.
@@ -107,6 +90,18 @@ class MainActivity : AppCompatActivity() {
                 handler.postDelayed(this, 1000)
             }
         })
+    }
+    private fun runCountdownTimer(CountdownTimerDisplayView: TextView) {
+        object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val timeRemaining = "seconds remaining: " + (millisUntilFinished / 1000).toString()
+                CountdownTimerDisplayView.text = timeRemaining
+            }
+
+            override fun onFinish() {
+                CountdownTimerDisplayView.text = getString(R.string.doneMessage)
+            }
+        }.start()
     }
 }
 
