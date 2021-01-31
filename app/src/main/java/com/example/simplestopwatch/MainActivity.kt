@@ -3,7 +3,9 @@ package com.example.simplestopwatch
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 //import java.lang.String
@@ -35,18 +37,31 @@ class MainActivity : AppCompatActivity() {
     private var running = false
     private var seconds = 0
 
+    //private val StartButton: Button = findViewById(R.id.Start_button)
+
     //private var TimeDisplayView: TextView = findViewById(R.id.TimeDisplay_textView)
 
     fun onClickStart(view: View) {
         running = true
+        //R.id.Start_button
+        view.isEnabled = false
+        val stopButton: Button = findViewById(R.id.Stop_button)
+        stopButton.isEnabled = true
     }
     fun onClickStop(view: View) {
         running = false
+        view.isEnabled = false
+        val startButton: Button = findViewById(R.id.Start_button)
+        startButton.isEnabled = true
     }
 
     fun onClickReset(view: View) {
         running = false
         seconds = 0
+        val startButton: Button = findViewById(R.id.Start_button)
+        startButton.isEnabled = true
+        val stopButton: Button = findViewById(R.id.Stop_button)
+        stopButton.isEnabled = true
     }
 
     private fun runTimer() {
@@ -55,6 +70,8 @@ class MainActivity : AppCompatActivity() {
         val timeView: TextView = findViewById(R.id.TimeDisplay_textView)
 
         // Creates a new Handler
+        //val looper = Looper()
+        //static fun myLooper(): Looper?{}
         val handler = Handler()
 
         // Call the post() method,
