@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val TimeDisplayView: TextView = findViewById(R.id.TimeDisplay_textView)
+        //val TimeDisplayView: TextView = findViewById(R.id.TimeDisplay_textView)
         val CountdownTimerDisplayView: TextView = findViewById(R.id.CountdownTimerDisplay)
 
         runTimer()
@@ -91,23 +91,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
 }
 
-// Method to configure and return an instance of CountDownTimer object
-//private fun Displaytimer(millisInFuture: Long, countDownInterval: Long): CountDownTimer {
-//    return object: CountDownTimer(millisInFuture, countDownInterval){
-//        override fun onTick(millisUntilFinished: Long){
-//            val timeRemaining = timeString(millisUntilFinished)
-//            //if (!running){
-//            //    text_view.text = "${text_view.text}\nStopped.(Cancelled)"
-//            //    cancel()
-//            //}else{
-//            val TimeDisplayView = findViewById(R.id.TimeDisplay_textView)
-//            TimeDisplayView.text = timeRemaining
-//            //}
-//        }
-//
 //        private fun timeString(millisUntilFinished: Long): Any {
 //            var millisUntilFinished:Long = millisUntilFinished
 //            val days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished)
@@ -129,11 +114,3 @@ class MainActivity : AppCompatActivity() {
 //            )
 //        }
 //
-//        override fun onFinish() {
-//        //    text_view.text = "Done"
-////          DO SOMETHING later with this
-////            button_start.isEnabled = true
-////            button_stop.isEnabled = false
-//        }
-//    }
-//}
