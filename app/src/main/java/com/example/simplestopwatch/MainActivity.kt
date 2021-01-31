@@ -16,19 +16,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val TimeDisplayView: TextView = findViewById(R.id.TimeDisplay_textView)
+        val CountdownTimerDisplayView: TextView = findViewById(R.id.CountdownTimerDisplay)
 
         runTimer()
 
-//        object : CountDownTimer(30000, 1000) {
-//            override fun onTick(millisUntilFinished: Long) {
-//                val timeRemaining = "seconds remaining: " + (millisUntilFinished / 1000).toString()
-//                TimeDisplayView.text = timeRemaining
-//            }
-//
-//            override fun onFinish() {
-//                TimeDisplayView.text = "done!"
-//            }
-//        }.start()
+        object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val timeRemaining = "seconds remaining: " + (millisUntilFinished / 1000).toString()
+                CountdownTimerDisplayView.text = timeRemaining
+            }
+
+            override fun onFinish() {
+                CountdownTimerDisplayView.text = getString(R.string.doneMessage)
+            }
+        }.start()
     }
 
     private var running = false
