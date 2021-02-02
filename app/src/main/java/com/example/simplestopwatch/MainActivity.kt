@@ -3,6 +3,7 @@ package com.example.simplestopwatch
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -16,7 +17,8 @@ class MainActivity : AppCompatActivity() {
 
         val countdownTimerDisplayView: TextView = findViewById(R.id.CountdownTimerDisplay)
 
-        runTimer()
+        //runTimer()
+        runTimer2()
 
         runCountdownTimer(countdownTimerDisplayView)
     }
@@ -89,6 +91,47 @@ class MainActivity : AppCompatActivity() {
                 handler.postDelayed(this, 1000)
             }
         })
+    }
+    private fun runTimer2() {
+
+        // Get the text view.
+        val timeView: TextView = findViewById(R.id.TimeDisplay_textView)
+
+        // Creates a new Handler
+        //val looper = Looper()
+        //static fun myLooper(): Looper?{}
+        //val handler = Handler()
+
+        val handler2 = Handler(Looper.getMainLooper()).postDelayed({
+            // Your Code
+//        }, 3000)
+
+            //this.post(object : Runnable {
+            //override fun run() {
+                val hours = seconds / 3600
+                val minutes = seconds % 3600 / 60
+                val secs = seconds % 60
+
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                val time = String
+                        .format(Locale.getDefault(),
+                                "%d:%02d:%02d", hours,
+                                minutes, secs)
+
+                // Set the text view text.
+                timeView.text = time
+
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    seconds++
+                }
+
+                // Post the code again
+                // with a delay of 1 second.
+                //handler.postDelayed(this, 1000)
+        }, 1000)
     }
     private fun runCountdownTimer(CountdownTimerDisplayView: TextView) {
         object : CountDownTimer(30000, 1000) {
