@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mainHandler: Handler
 
-    private var running = false
-    private var seconds = 0
+    private var running = true
+    private var seconds = 10
 
     private val updateTimerDisplay = object : Runnable {
         override fun run() {
@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //var running = false
-        //var seconds = 0
+        var running = true
+        var seconds = 10
 
         val countdownTimerDisplayView: TextView = findViewById(R.id.CountdownTimerDisplay)
 
@@ -37,6 +37,16 @@ class MainActivity : AppCompatActivity() {
         mainHandler = Handler(Looper.getMainLooper())
 
         runCountdownTimer(countdownTimerDisplayView)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mainHandler.removeCallbacks(updateTimerDisplay)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainHandler.post(updateTimerDisplay)
     }
 
     //private var running = false
