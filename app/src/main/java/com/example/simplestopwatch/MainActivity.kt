@@ -14,12 +14,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val TimeDisplayView: TextView = findViewById(R.id.TimeDisplay_textView)
-        val CountdownTimerDisplayView: TextView = findViewById(R.id.CountdownTimerDisplay)
+        val countdownTimerDisplayView: TextView = findViewById(R.id.CountdownTimerDisplay)
 
         runTimer()
 
-        runCountdownTimer(CountdownTimerDisplayView)
+        runCountdownTimer(countdownTimerDisplayView)
     }
 
     private var running = false
