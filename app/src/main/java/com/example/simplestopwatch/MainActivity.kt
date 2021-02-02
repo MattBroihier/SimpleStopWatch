@@ -11,20 +11,36 @@ import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var mainHandler: Handler
+
+    private var running = false
+    private var seconds = 0
+
+    private val updateTimerDisplay = object : Runnable {
+        override fun run() {
+            runTimer2()
+            mainHandler.postDelayed(this, 1000)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //var running = false
+        //var seconds = 0
+
         val countdownTimerDisplayView: TextView = findViewById(R.id.CountdownTimerDisplay)
 
         //runTimer()
-        runTimer2()
+        mainHandler = Handler(Looper.getMainLooper())
 
         runCountdownTimer(countdownTimerDisplayView)
     }
 
-    private var running = false
-    private var seconds = 0
+    //private var running = false
+    //private var seconds = 0
 
     fun onClickStart(view: View) {
         running = true
@@ -94,44 +110,27 @@ class MainActivity : AppCompatActivity() {
     }
     private fun runTimer2() {
 
-        // Get the text view.
         val timeView: TextView = findViewById(R.id.TimeDisplay_textView)
 
-        // Creates a new Handler
-        //val looper = Looper()
-        //static fun myLooper(): Looper?{}
-        //val handler = Handler()
+        val hours = seconds / 3600
+        val minutes = seconds % 3600 / 60
+        val secs = seconds % 60
 
-        val handler2 = Handler(Looper.getMainLooper()).postDelayed({
-            // Your Code
-//        }, 3000)
+        // Format the seconds into hours, minutes,
+        // and seconds.
+        val time = String
+                .format(Locale.getDefault(),
+                        "%d:%02d:%02d", hours,
+                        minutes, secs)
 
-            //this.post(object : Runnable {
-            //override fun run() {
-                val hours = seconds / 3600
-                val minutes = seconds % 3600 / 60
-                val secs = seconds % 60
+        // Set the text view text.
+        timeView.text = time
 
-                // Format the seconds into hours, minutes,
-                // and seconds.
-                val time = String
-                        .format(Locale.getDefault(),
-                                "%d:%02d:%02d", hours,
-                                minutes, secs)
-
-                // Set the text view text.
-                timeView.text = time
-
-                // If running is true, increment the
-                // seconds variable.
-                if (running) {
-                    seconds++
-                }
-
-                // Post the code again
-                // with a delay of 1 second.
-                //handler.postDelayed(this, 1000)
-        }, 1000)
+        // If running is true, increment the
+        // seconds variable.
+        if (running) {
+            seconds++
+        }
     }
     private fun runCountdownTimer(CountdownTimerDisplayView: TextView) {
         object : CountDownTimer(30000, 1000) {
