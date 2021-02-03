@@ -155,25 +155,3 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 }
-
-//        private fun timeString(millisUntilFinished: Long): Any {
-//            var millisUntilFinished:Long = millisUntilFinished
-//            val days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished)
-//            millisUntilFinished -= TimeUnit.DAYS.toMillis(days)
-//
-//            val hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished)
-//            millisUntilFinished -= TimeUnit.HOURS.toMillis(hours)
-//
-//            val minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
-//            millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes)
-//
-//            val seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)
-//
-//            // Format the string
-//            return String.format(
-//                    Locale.getDefault(),
-//                    "%02d day: %02d hour: %02d min: %02d sec",
-//                    days, hours, minutes, seconds
-//            )
-//        }
-//
