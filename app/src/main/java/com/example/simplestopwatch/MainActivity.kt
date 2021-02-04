@@ -28,15 +28,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //var running = false
-        //var seconds = 0
-
-        val countdownTimerDisplayView: TextView = findViewById(R.id.CountdownTimerDisplay)
+        val countdownTimerDisplay: TextView = findViewById(R.id.CountdownTimerDisplay)
 
         //runTimer()
         mainHandler = Handler(Looper.getMainLooper())
 
-        runCountdownTimer(countdownTimerDisplayView)
+        runCountdownTimer(countdownTimerDisplay)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -64,9 +61,6 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         mainHandler.post(updateTimerDisplay)
     }
-
-    //private var running = false
-    //private var seconds = 0
 
     fun onClickStart(view: View) {
         running = true
@@ -149,11 +143,8 @@ class MainActivity : AppCompatActivity() {
                         "%d:%02d:%02d", hours,
                         minutes, secs)
 
-        // Set the text view text.
         timeView.text = time
 
-        // If running is true, increment the
-        // seconds variable.
         if (running) {
             seconds++
         }
