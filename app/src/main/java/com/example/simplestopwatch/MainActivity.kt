@@ -39,14 +39,16 @@ class MainActivity : AppCompatActivity() {
         runCountdownTimer(countdownTimerDisplayView)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        running = savedInstanceState?.getBoolean("running")
-        seconds = savedInstanceState?.getInt("seconds")
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        savedInstanceState.run {
+            running = savedInstanceState?.getBoolean("running")
+            seconds = savedInstanceState?.getInt("seconds")
+        }
         super.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState?.run{
+        outState.run{
             putInt("seconds", seconds)
             putBoolean("running", running)
         }
