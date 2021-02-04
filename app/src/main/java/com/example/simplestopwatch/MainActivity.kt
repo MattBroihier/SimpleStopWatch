@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var running = false
-        var seconds = 0
+        //var running = false
+        //var seconds = 0
 
         val countdownTimerDisplayView: TextView = findViewById(R.id.CountdownTimerDisplay)
 
@@ -37,6 +37,20 @@ class MainActivity : AppCompatActivity() {
         mainHandler = Handler(Looper.getMainLooper())
 
         runCountdownTimer(countdownTimerDisplayView)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        running = savedInstanceState?.getBoolean("running")
+        seconds = savedInstanceState?.getInt("seconds")
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState?.run{
+            putInt("seconds", seconds)
+            putBoolean("running", running)
+        }
+        super.onSaveInstanceState(outState)
     }
 
     override fun onPause() {
