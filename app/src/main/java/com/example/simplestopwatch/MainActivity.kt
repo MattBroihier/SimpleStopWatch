@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         savedInstanceState.run {
-            running = savedInstanceState?.getBoolean("running")
-            seconds = savedInstanceState?.getInt("seconds")
+            running = savedInstanceState.getBoolean("running")
+            seconds = savedInstanceState.getInt("seconds")
         }
         super.onRestoreInstanceState(savedInstanceState)
     }
